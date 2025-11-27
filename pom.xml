@@ -20,6 +20,12 @@
 	<developers>
 		<developer/>
 	</developers>
+	<profiles>
+     <profile>
+        <id>production</id>
+     </profile>
+    </profiles>
+
 	<scm>
 		<connection/>
 		<developerConnection/>
