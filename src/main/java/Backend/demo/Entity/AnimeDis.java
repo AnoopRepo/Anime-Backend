@@ -19,5 +19,6 @@ public class AnimeDis {
     private String genreType;
     private String quote;
     private String imageUrl;
+    private String link;
 
 }
