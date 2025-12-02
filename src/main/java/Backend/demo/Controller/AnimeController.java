@@ -1,7 +1,9 @@
 package Backend.demo.Controller;
 
 import Backend.demo.Entity.AnimeDis;
+import Backend.demo.Entity.Email;
 import Backend.demo.Services.AnimeServices;
+import Backend.demo.Services.EmailServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,9 @@ public class AnimeController {
 
     @Autowired
     private AnimeServices services;
+
+    @Autowired
+    private EmailServices emailServices;
 
     @GetMapping()
     public ResponseEntity<?> getDet(){
@@ -53,6 +58,15 @@ public class AnimeController {
        }
         System.out.println("hello No");
        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PostMapping("/email")
+    public ResponseEntity<?> emailAttaching(@RequestBody Email email){
+        boolean send=emailServices.sendMail(email.getName(), email.getEmail(), email.getEmail());
+        if(send){
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }
