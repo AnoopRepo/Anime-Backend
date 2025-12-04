@@ -1,5 +1,6 @@
 package Backend.demo.Services;
 
+import Backend.demo.Entity.Email;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -11,9 +12,25 @@ public class EmailServices {
     @Autowired
     private JavaMailSender mailSender;
 
-    public boolean sendMail(String name, String email, String message) {
+    public boolean sendReply(String email, String message) {
+        if(message!=null && !message.isEmpty()){
+            SimpleMailMessage msg = new SimpleMailMessage();
+            String name="Anoop Yadav";
+            String mesage="Thanku you for responsing";
+            msg.setTo(email);
+            msg.setSubject("New Message from " + name);
+            msg.setText("Name: " + name + "\nMessage:\n" + mesage);
+
+            mailSender.send(msg);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean emailToAdmin(String name,String email,String message) {
         SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setTo("anoopyadav5984@gmail.com");
+        String emails="londamaka.fake@gmail.com";
+        msg.setTo(emails);
         msg.setSubject("New Message from " + name);
         msg.setText("Name: " + name + "\nEmail: " + email + "\nMessage:\n" + message);
         msg.setReplyTo(email);
