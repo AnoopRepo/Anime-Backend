@@ -62,6 +62,7 @@ public class AnimeController {
 
     @PostMapping("/email")
     public ResponseEntity<?> emailAttaching(@RequestBody Email email){
+        System.out.println("hello bhai from email");
         boolean send=emailServices.emailToAdmin(email.getName(), email.getEmail(), email.getMessage());
         boolean sends=emailServices.sendReply(email.getEmail(),email.getMessage());
         if(sends){
